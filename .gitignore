@@ -50,3 +50,5 @@ spoonfeederPings.json
 aaa_eval_stuff.txt
 dump.txt
 scripts/*.bat
+.dev/*
+src/commands/.dev/*
