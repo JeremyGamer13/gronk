@@ -18,12 +18,12 @@ for (const file of files) {
 }
 
 module.exports = (message) => {
-    const content = String(message.cleanContent).toLowerCase().replace(/[ \n\t',.!?]+/gmi, '');
+    const content = String(message.cleanContent).toLowerCase();
     if (!configuration.autoResponseChannels.includes(message.channel.id)) {
         return;
     }
     for (const { check, data } of responses) {
-        if (content.includes(check)) {
+        if ((new RegExp(`(^|\\s)${check.split("").map(v => v + "\\s*").join("")}`, 'i')).test(content)) {
             let msg = data.message ?? data;
             // custom responses (for example run actions on the message after responding)
             if (data.custom) {

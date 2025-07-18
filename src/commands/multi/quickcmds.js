@@ -75,6 +75,14 @@ class SHCommand extends QuickReplyCommand {
         this.message = "This server will not help you with scratch projects! Go to https://discord.gg/7gfPrhWwb2 instead.";
     }
 }
+class GoochCommand extends QuickReplyCommand {
+    constructor() {
+        super();
+        this.name = "gooch";
+        this.description = "Who was here?";
+        this.message = "Sir William Gooch was here.";
+    }
+}
 
 // needs to do new Command() in index.js because typing static every time STINKS!
 module.exports = {
@@ -86,5 +94,6 @@ module.exports = {
     comment: CommentCommand,
     studio: StudioCommand,
     server: ServerCommand,
-    scratchhelp: SHCommand
+    scratchhelp: SHCommand,
+    gooch: GoochCommand
 };

@@ -3,7 +3,7 @@ const childProcess = require("child_process");
 const isInTestMode = process.argv[2] === 'test';
 
 const spawnProcess = () => {
-    const args = ['src/index.js'];
+    const args = ['--max-old-space-size=4096', 'src/index.js'];
 
     if (isInTestMode) {
         args.push('test');

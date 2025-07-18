@@ -91,7 +91,7 @@ module.exports = async (message, client, commandUtility) => {
             // 1: EXPLICIT, 3: AGE_RESTRICTED
             const guildNSFW = guild.nsfw === true || guild.nsfw_level === 1 || guild.nsfw_level === 3;
             // NOTE: Maybe at some point we should add more words to this, 🤷‍♂️
-            const nameIsUnsafe = !!(guildName.replace(/\s/g, '').match(/(18\+|penguinbot|nsfw|onlyfans|boobs|porn|hentai|momm|moms|dick|yiff|🔞|🍑|🍆)/i))
+            const nameIsUnsafe = !!(guildName.replace(/\s/g, '').match(/(18\+|nsfw|onlyfans|boobs|porn|hentai|momm|moms|dick|yiff|🔞|🍑|🍆)/i))
             if (guildNSFW || nameIsUnsafe) {
                 return guildIsNSFW(inviteCode, guildName);
             }
