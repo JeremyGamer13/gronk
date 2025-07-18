@@ -1,6 +1,7 @@
 const synchronizeSlashCommands = require('@frostzzone/discord-sync-commands');
 const glob = require("glob");
 
+const env = require("../../util/env-util");
 const configuration = require("../../config");
 
 class BotEvent {
@@ -42,11 +43,11 @@ class BotEvent {
 
                 for (const commandName in module) {
                     const commandClass = module[commandName];
-                    const command = new commandClass(client);
+                    const command = new commandClass(client, state);
 
                     // Define a function to create a new instance of the command
                     command.instantiate = () => {
-                        return new commandClass(client);
+                        return new commandClass(client, state);
                     };
 
                     // Register command and aliases in state.commands map
@@ -82,14 +83,16 @@ class BotEvent {
         console.log('Registered slash commands!');
 
         // set our status
+        const baseStatusText = isInTestMode ? configuration.status.testing : configuration.status.normal;
+        const statusText = baseStatusText.replace(/{{[^}]+}}/g, (text) => env.get(text.replace(/[{}]/g, "")))
         client.user.setPresence({
             status: "online",
             activities: [{
-                name: isInTestMode ? 'PenguinBot Testing' : 'PenguinMod | pm!help',
+                name: statusText,
                 type: "PLAYING"
             }]
         });
-
+        
         // log
         const mainChannel = await client.channels.cache.get(configuration.channels.botTestingChannel);
         mainChannel.send({

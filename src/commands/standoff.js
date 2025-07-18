@@ -25,7 +25,7 @@ const loadFrames = async () => {
 loadFrames();
 
 class Command {
-    constructor(client) {
+    constructor(client, state) {
         this.name = "standoff";
         this.description = "Challenge another user. One user must shoot the other before the other one can.";
         this.attributes = {
@@ -34,7 +34,7 @@ class Command {
             lockedToCommands: true,
         };
         this.example = [
-            { text: "pm!standoff @user", image: "standoff_example1.png" },
+            { text: `${state.prefix}standoff @user`, image: "standoff_example1.png" },
         ];
 
         /**
@@ -47,8 +47,10 @@ class Command {
      * @param {discord.Message} message 
      */
     async invoke(message, _, util) {
+        const prefix = util.request("prefix");
+        
         const u1 = message.mentions.members.at(0);
-        if (!u1) return message.reply('Ping another user to go against.\nUse **pm!help standoff** for more info.');
+        if (!u1) return message.reply(`Ping another user to go against.\nUse **${prefix}help standoff** for more info.`);
 
         if (util.interactionsBlocked(u1)) {
             if (u1.id !== message.author.id) return message.reply('The user you mentioned has interactions disabled.');

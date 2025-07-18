@@ -107,7 +107,7 @@ class Command {
             db.setLocal(`${userId}_threadId`, gameThread.id);
             db.saveDataToFile();
 
-            this.cleanUpNonCommands(gameThread, userId);
+            this.cleanUpNonCommands(gameThread, userId, util.request("prefix"));
         } else if (command === 'config') {
             await this.configureEmojis(message);
             return;
@@ -117,15 +117,16 @@ class Command {
         } else {
             const gameState = db.get(userId);
             if (!gameState) {
+                const prefix = util.request("prefix");
                 const embed = new MessageEmbed()
                     .setColor('#0099ff')
                     .setTitle('Sokoban Game Commands')
-                    .setDescription('You need to start a game first by using `pm!sokoban start`.')
+                    .setDescription(`You need to start a game first by using \`${prefix}sokoban start\`.`)
                     .addFields(
-                        { name: 'Start Game', value: '`pm!sokoban start` - Start a new Sokoban game.' },
-                        { name: 'Move Player', value: '`Buttons on Game UI` - Move the player in the specified direction (e.g., up, down, left, right).' },
-                        { name: 'Configure Emojis', value: '`pm!sokoban config` - Configure custom emojis for the game.' },
-                        { name: 'Delete Game', value: '`pm!sokoban end` - Delete the current game and thread.' }
+                        { name: 'Start Game', value: `\`${prefix}sokoban start\` - Start a new Sokoban game.` },
+                        { name: 'Move Player', value: `\`Buttons on Game UI\` - Move the player in the specified direction (e.g., up, down, left, right).` },
+                        { name: 'Configure Emojis', value: `\`${prefix}sokoban config\` - Configure custom emojis for the game.` },
+                        { name: 'Delete Game', value: `\`${prefix}sokoban end\` - Delete the current game and thread.` }
                     );
 
                 message.reply({ embeds: [embed] });
@@ -197,7 +198,7 @@ class Command {
             });
         });
 
-        this.cleanUpNonCommands(configThread, userId);
+        this.cleanUpNonCommands(configThread, userId, util.request("prefix"));
     }
 
     async deleteGame(message, userId) {
@@ -236,8 +237,8 @@ class Command {
         return defaultEmojis[type];
     }
 
-    cleanUpNonCommands(thread, userId) {
-        const filter = message => message.author.id !== userId && !message.content.startsWith('pm!sokoban');
+    cleanUpNonCommands(thread, userId, prefix) {
+        const filter = message => message.author.id !== userId && !message.content.startsWith(`${prefix}sokoban`);
         const collector = thread.createMessageCollector({ filter });
     
         collector.on('collect', async message => {
@@ -245,7 +246,7 @@ class Command {
                 await message.delete();
             }
     
-            if (message.content.startsWith('pm!sokoban')) {
+            if (message.content.startsWith(`${prefix}sokoban`)) {
                 const msg = await message.channel.send("Please use commands outside of the thread");
                 setTimeout(() => {
                     msg.delete();

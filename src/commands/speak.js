@@ -8,7 +8,7 @@ const voiceChannelWithTTS = ['1169802355861114901', PenguinChatVC ? '11241330550
 const speechCooldowns = {};
 
 class Command {
-    constructor(client) {
+    constructor(client, state) {
         this.name = "speak";
         this.description = "Read out what you say or reply to someone to make it say what someone else says in the Scratch TTS voice.";
         this.attributes = {
@@ -17,7 +17,7 @@ class Command {
             lockedToCommands: true,
         };
         this.example = [
-            { text: "pm!speak abc", image: "speak_example1.png" }
+            { text: `${state.prefix}speak abc`, image: "speak_example1.png" }
         ];
 
         this.client = client;

@@ -1,8 +1,8 @@
 const TextModifierCommand = require('../../basecommands/textmodifier');
 
 class Command extends TextModifierCommand {
-    constructor(client) {
-        super(client);
+    constructor(client, state) {
+        super(client, state);
         this.name = "autocorrect";
         this.description = "Autocorrect some text";
         this.textDescription = "Text to autocorrect.";

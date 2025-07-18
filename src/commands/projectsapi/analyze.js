@@ -190,7 +190,7 @@ const collectProjectInfo = async id => {
 }
 
 class Command {
-    constructor() {
+    constructor(_, state) {
         this.name = "analyze";
         this.description = "Analyze a PenguinMod project by it's ID to get info about it's contents.";
         this.attributes = {
@@ -199,8 +199,8 @@ class Command {
             lockedToCommands: true,
         };
         this.example = [
-            { text: "pm!analyze 4023876129249", image: "analyze_example1.png" },
-            { text: "pm!analyze (project id)" },
+            { text: `${state.prefix}analyze 4023876129249`, image: "analyze_example1.png" },
+            { text: `${state.prefix}analyze (project id)` },
         ];
         this.slash = {
             options: [{

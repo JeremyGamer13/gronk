@@ -30,7 +30,7 @@ const randomNumber = (items) => crypto.randomInt(1, items);
 const activeBattles = [];
 
 class Command {
-    constructor(client) {
+    constructor(client, state) {
         this.name = "fight";
         this.description = "Fights another user.";
         this.attributes = {
@@ -39,8 +39,8 @@ class Command {
             lockedToCommands: true,
         };
         this.example = [
-            { text: "pm!fight @user1 @user2", image: "fight_example1.png" },
-            { text: "pm!fight @user" },
+            { text: `${state.prefix}fight @user1 @user2`, image: "fight_example1.png" },
+            { text: `${state.prefix}fight @user` },
         ];
         this.slash = {
             options: [{

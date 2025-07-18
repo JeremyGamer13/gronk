@@ -4,6 +4,16 @@ const env = require("./util/env-util");
 const configuration = {
     // Used in cases like "Welcome to the {NAME} server!" and "Do not post NSFW invites in the {NAME} server."
     nameReference: "PenguinMod",
+    // The name of your bot (some files like the credits command will still say PenguinBot, since this is PenguinBot's code)
+    nameBotReference: "PenguinBot",
+
+    // Status of the bot, stated in Discord like "Playing (text)" or "Playing a game" then, on a new line "(text)"
+    status: {
+        // The bot can use seperate text when running in test mode.
+        // Note that the .env variables are available here if you use stuff like {{NAME}}, avoid using something like {{TOKEN}} or {{PENGUINMOD_PASSWORD}}
+        normal: "{{PREFIX}}help | PenguinMod",
+        testing: "{{PREFIX_TEST}}help | PenguinBot Testing",
+    },
 
     // The bot has many auto responses, toggled using the RESPOND_TO_KEYWORDS env. They will only be usable in these channels:
     autoResponseChannels: [

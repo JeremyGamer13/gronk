@@ -19,15 +19,14 @@ const isJoe = (idx, array) => {
 }
 
 class Command extends TextModifierCommand {
-    constructor(client) {
-        super(client);
+    constructor(client, state) {
+        super(client, state);
         this.name = "typo";
         this.description = "Give your text some typos.";
         this.textDescription = "Text to typo-ify.";
         this.example = [
-            { text: "pm!typo", image: "joe_example1.png" },
-            { text: "pm!typo Hello my text is here" },
-            { text: "pm!typo (replying to a message)" },
+            { text: `${state.prefix}typo Hello my text is here` },
+            { text: `${state.prefix}typo (replying to a message)` },
         ];
         this.setSlashDetail();
     }

@@ -10,10 +10,12 @@ class Command {
         };
     }
 
-    async invoke(message, args) {
+    async invoke(message, args, util) {
+        const prefix = util.request("prefix");
+        
         // Check if the command has the required arguments
         if (args.length < 1) {
-            return message.reply('Usage: pm!msrole <add/remove/list> @user');
+            return message.reply(`Usage: ${prefix}msrole <add/remove/list> @user`);
         }
 
         const action = args[0].toLowerCase();

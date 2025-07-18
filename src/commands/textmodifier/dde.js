@@ -1,15 +1,14 @@
 const TextModifierCommand = require('../../basecommands/textmodifier');
 
 class Command extends TextModifierCommand {
-    constructor(client) {
-        super(client);
+    constructor(client, state) {
+        super(client, state);
         this.name = "ddededodediamante";
         this.description = "Make your text ddededodediamantey!";
         this.textDescription = "Text to ddededodediamanteify.";
         this.example = [
-            { text: "pm!ddededodediamante", image: "example1.png" },
-            { text: "pm!ddededodediamante Hello my text is here" },
-            { text: "pm!ddededodediamante (replying to a message)" },
+            { text: `${state.prefix}ddededodediamante Hello my text is here` },
+            { text: `${state.prefix}ddededodediamante (replying to a message)` },
         ];
         this.setSlashDetail();
     }

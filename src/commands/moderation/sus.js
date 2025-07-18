@@ -118,9 +118,10 @@ class Command {
         });
     }
 
-    async invoke(message, args) {
+    async invoke(message, args, util) {
+        const prefix = util.request("prefix");
         if (args.length < 1) {
-            return message.reply('Usage: `pm!sus <add/remove/list> userID (reason if adding)`');
+            return message.reply(`Usage: \`${prefix}sus <add/remove/list> userID (reason if adding)\``);
         }
 
         const action = args[0].toLowerCase();

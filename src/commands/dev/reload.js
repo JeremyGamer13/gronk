@@ -4,7 +4,7 @@ const path = require("path");
 class Command {
     constructor(client) {
         this.name = "reload";
-        this.description = "Reload a command in the bot.";
+        this.description = "Reload a command in the bot. Only works for commands without any local dependencies (\"require\"s from a file path).";
         this.attributes = {
             unlisted: true,
             permission: 1,
@@ -53,11 +53,11 @@ class Command {
         const commandsLoaded = [];
         for (const commandName in module) {
             const commandClass = module[commandName];
-            const command = new commandClass(this.client);
+            const command = new commandClass(this.client, util.state);
 
             // Define a function to create a new instance of the command
             command.instantiate = () => {
-                return new commandClass(this.client);
+                return new commandClass(this.client, util.state);
             };
 
             // Register command and aliases in state.commands map

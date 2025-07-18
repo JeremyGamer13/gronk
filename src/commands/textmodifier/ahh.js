@@ -1,14 +1,14 @@
 const TextModifierCommand = require('../../basecommands/textmodifier');
 
 class AhhCommand extends TextModifierCommand {
-    constructor(client) {
-        super(client);
+    constructor(client, state) {
+        super(client, state);
         this.name = "ahh";
         this.description = "ahh your text.";
         this.textDescription = "Text to ahh.";
         this.example = [
-            { text: "pm!ahh Hello my text is here" },
-            { text: "pm!ahh (replying to a message)" },
+            { text: `${state.prefix}ahh Hello my text is here` },
+            { text: `${state.prefix}ahh (replying to a message)` },
         ];
         this.setSlashDetail();
     }

@@ -13,6 +13,7 @@ const listedToppings = [ // visual only for listings, validToppings includes act
     'olive',
     'pineapple',
 ];
+// this toppings list actually wasnt supposed to be public so people would manually figure it out... sorry about that 😬
 const validToppings = [
     'sauce',
     'pepperoni',
@@ -116,7 +117,7 @@ const wait = (ms) => {
 };
 
 class Command {
-    constructor(client) {
+    constructor(client, state) {
         this.name = "pizza";
         this.description = "Make a pizza with toppings.";
         this.attributes = {
@@ -125,9 +126,9 @@ class Command {
             lockedToCommands: true,
         };
         this.example = [
-            { text: "pm!pizza pepperoni", image: "pizza_example1.png" },
-            { text: "pm!pizza toppings" },
-            { text: "pm!pizza" },
+            { text: `${state.prefix}pizza pepperoni`, image: "pizza_example1.png" },
+            { text: `${state.prefix}pizza toppings` },
+            { text: `${state.prefix}pizza` },
         ];
         this.slash = {
             options: [{

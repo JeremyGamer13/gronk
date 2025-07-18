@@ -22,7 +22,7 @@ class Command {
      * @param {Message} message 
      * @param {Array} args 
      */
-    async invoke(message, args) {
+    async invoke(message, args, util) {
         let canUseForce = configuration.permissions.exclusiveroleForce.includes(message.author.id);
         if (!args[0]) return message.reply('Please provide a subcommand: `create | get | delete | fix | name | color | icon`');
         
@@ -124,13 +124,14 @@ class Command {
                 break;
             }
             case 'get': {
+                const prefix = util.request("prefix");
                 const roleID = DonatorRoleDB.get(String(message.member.id));
                 if (!roleID) {
-                    return message.reply("You don't have an exclusive role!\nUse `pm!exclusiverole create` to make one.");
+                    return message.reply(`You don't have an exclusive role!\nUse \`${prefix}exclusiverole create\` to make one.`);
                 }
                 const role = await message.guild.roles.fetch(roleID);
                 if (!role) {
-                    return message.reply("You don't have an exclusive role!\nUse `pm!exclusiverole create` to make one.");
+                    return message.reply(`You don't have an exclusive role!\nUse \`${prefix}exclusiverole create\` to make one.`);
                 }
                 const embed = new MessageEmbed();
                 embed.setTitle(`${role.name}`);

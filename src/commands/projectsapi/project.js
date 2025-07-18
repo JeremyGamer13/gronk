@@ -12,7 +12,7 @@ const safeNumber = (num) => {
 };
 
 class Command {
-    constructor() {
+    constructor(_, state) {
         this.name = "project";
         this.description = "Get details about a project using it's ID or searching by name.";
         this.attributes = {
@@ -21,7 +21,7 @@ class Command {
             lockedToCommands: true,
         };
         this.example = [
-            { text: "pm!project z", image: "project_example1.png" }
+            { text: `${state.prefix}project z`, image: "project_example1.png" }
         ];
 
         // remember, network usage

@@ -2,7 +2,7 @@ const discord = require("discord.js");
 const OptionType = require('../util/optiontype');
 
 class Command {
-    constructor(client) {
+    constructor(client, state) {
         this.name = "inspect";
         this.description = "View how a message's content works.";
         this.attributes = {
@@ -10,7 +10,7 @@ class Command {
             admin: false,
         };
         this.example = [
-            { text: "pm!inspect", image: "inspect_example1.png" }
+            { text: `${state.prefix}inspect`, image: "inspect_example1.png" }
         ];
 
         this.client = client;

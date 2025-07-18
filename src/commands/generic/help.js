@@ -126,6 +126,7 @@ class Command {
     async invoke(message, args, util, usingSlash) {
         usingSlash = usingSlash === true;
 
+        const prefix = util.request("prefix");
         const commands = util.request('commands');
         const embed = new discord.MessageEmbed();
         const files = [];
@@ -155,11 +156,11 @@ class Command {
             if (!shouldExplainCommand) {
                 embed.setTitle("Command not found");
                 embed.setFooter({
-                    text: `Run "${usingSlash ? '/' : 'pm!'}help" on its own to view all commands.`
+                    text: `Run "${usingSlash ? '/' : prefix}help" on its own to view all commands.`
                 });
                 embed.setDescription("The command either does not exist or is an admin-only command.");
             } else {
-                embed.setTitle(`How to use ${usingSlash ? '/' : 'pm!'}${commandName}`);
+                embed.setTitle(`How to use ${usingSlash ? '/' : prefix}${commandName}`);
                 let text = `${command.description}`;
                 if (command.example) {
                     // we have examples for this command

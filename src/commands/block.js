@@ -30,12 +30,12 @@ const wait = (ms) => {
 };
 
 class Command {
-    constructor() {
+    constructor(_, state) {
         this.name = "block";
         this.description = "Generate images of blocks from [scratchblocks syntax](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax)";
         this.slashdescription = "Generate images of blocks from scratchblocks syntax";
         this.example = [
-            { text: "pm!block <pen is down?::pen>", image: "block_example1.png" }
+            { text: `${state.prefix}block <pen is down?::pen>`, image: "block_example1.png" }
         ];
         this.attributes = {
             unlisted: false,
