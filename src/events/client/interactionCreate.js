@@ -1,4 +1,4 @@
-const CommandUtility = new (require("../../util/utility.js"))();
+const CommandUtility = require("../../util/utility.js");
 
 class BotEvent {
     constructor(client) {
