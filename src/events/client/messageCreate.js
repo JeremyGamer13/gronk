@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const CommandUtility = require("../../util/utility.js");
 
 const handleBotAutoResponse = require('../../resources/responses/index.js');
+const gronkResponse = require('../../util/gronk-response.js');
 const configuration = require("../../config");
 const env = require("../../util/env-util");
 
@@ -45,7 +46,37 @@ class BotEvent {
             if (env.getBool('RESPOND_TO_KEYWORDS') && !isTestingInPublic) {
                 handleBotAutoResponse(message);
             }
-            return;
+
+            if (!message.guild) return;
+
+            let isReplyToGronk = false;
+            let repliedMessage = null;
+            if (env.getBool('RESPOND_TO_REPLIES')) {
+                // check if this is a reply
+                if (message.reference && message.reference.messageId) {
+                    repliedMessage = message.channel.messages.cache.get(message.reference.messageId);
+                    isReplyToGronk = repliedMessage.author.id === '750179777637515264';
+                }
+            }
+
+            // check for my ping
+            if (!isReplyToGronk) {
+                const firstMentioned = message.mentions.members.first();
+                if (!firstMentioned) return;
+                if (firstMentioned.user.id !== '750179777637515264') return;
+                if (!message.content.trim().startsWith('<@750179777637515264>')) return;
+            }
+
+            const responseString = await gronkResponse(message, env.getBool('RESPOND_TO_REPLIES') ? repliedMessage : null);
+            return message.reply({
+                content: responseString.substring(0, 2000),
+                allowedMentions: {
+                    parse: [],
+                    users: [],
+                    roles: [],
+                    repliedUser: true
+                }
+            });
         }
     
         // handle cmds
