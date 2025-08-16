@@ -67,7 +67,7 @@ class Command {
         const setDesc = (page) => {
             const commands = text.slice(page * commandOnOnePage, (page + 1) * commandOnOnePage);
             embed.setDescription(commands.join('\n'));
-            embed.setFooter({ text: `Page ${page + 1} - ${maxPages} | ${text.length} commands | Developed by MubiLop & PenguinMod` });
+            embed.setFooter({ text: `Page ${page + 1} - ${maxPages} | ${text.length} commands` });
         };
         let page = 0;
         setDesc(page);

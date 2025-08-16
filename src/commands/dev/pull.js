@@ -18,15 +18,15 @@ class Command {
             return;
         }
 
-        const repliedMessage = await message.reply('Pulling changes from the GitHub, please wait... <:juice:1158872031211831377>');
+        const repliedMessage = await message.reply('Pulling changes from the GitHub, please wait...');
         childProcess.execSync("git pull origin main");
         if (args[0] === 'restart') {
-            repliedMessage.edit('Updated! <:good:1118293837773807657>\nBot is restarting... <:juice:1158872031211831377>');
+            repliedMessage.edit('Updated!\nBot is restarting...');
             setTimeout(() => {
                 process.exit(50);
             }, 1000);
         } else {
-            repliedMessage.edit('Updated! <:good:1118293837773807657>');
+            repliedMessage.edit('Updated!');
         }
     }
 }

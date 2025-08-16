@@ -15,7 +15,7 @@ class Command {
             return;
         }
 
-        await message.reply('Restarting bot... <:juice:1158872031211831377>');
+        await message.reply('Restarting bot...');
         process.exit(50);
     }
 }

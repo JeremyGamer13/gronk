@@ -23,6 +23,7 @@ const configuration = {
         '1038236110335266907', // off-topic
         '1038251459843723274', // commands
         '1139749855913316474', // penguinbot-test
+        '746156168560508953', // test thing
     ],
 
     // Used to link to channels within the server. These IDs are the ones we use in PenguinMod.
