@@ -3,14 +3,11 @@ const discord = require("discord.js");
 class Command {
     constructor(client) {
         this.name = "credits";
-        this.description = "View creation credits for the bot.";
+        this.description = "View creation credits for PenguinBot.";
         this.attributes = {
             unlisted: false,
             admin: false,
             lockedToCommands: true,
-        };
-        this.slash = {
-            options: []
         };
 
         this.client = client;
@@ -18,11 +15,15 @@ class Command {
 
     async invoke(message) {
         const embed = new discord.MessageEmbed();
-        embed.setColor("#00c3ff");
+        embed.setColor("#00ffaa");
         embed.setTitle('Credits');
         
         embed.setDescription('Thanks to all the contributors & help on the creation of PenguinBot!');
         embed.addFields({
+            name: 'gronk forked from',
+            value: `PenguinBot`,
+            inline: false
+        }, {
             name: 'Created by',
             value: `JeremyGamer13`,
             inline: false

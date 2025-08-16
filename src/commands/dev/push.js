@@ -6,7 +6,7 @@ class Command {
         this.description = "Push to branch";
         this.attributes = {
             unlisted: true,
-            permission: 1,
+            permission: 4,
         };
     }
 

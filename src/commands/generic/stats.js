@@ -32,7 +32,7 @@ class Command {
         const { cpuUsage, waitTime:cpuFetchTime } = await fetchCpuUsage();
         
         const embed = new discord.MessageEmbed();
-        embed.setColor("#00c3ff");
+        embed.setColor("#00ffaa");
         embed.setTitle('Statistics');
 
         embed.addFields({

@@ -8,24 +8,10 @@ class Command {
         this.attributes = {
             unlisted: true,
             admin: false,
-        };
-        this.slash = {
-            options: [{
-                type: OptionType.STRING,
-                name: 'command',
-                required: false,
-                description: 'Command to get help for. (optional)'
-            }]
+            lockedToCommands: true,
         };
 
         this.client = client;
-    }
-
-    convertSlashCommand(interaction, util) {
-        const text = `${interaction.options.getString('command') || ''}`;
-        interaction.author = interaction.member.user;
-        const args = text.split(' ');
-        return [interaction, text ? args : [], util, true];
     }
 
     async handleSendingList(message, embed, commands, util, args) {
@@ -130,7 +116,7 @@ class Command {
         const commands = util.request('commands');
         const embed = new discord.MessageEmbed();
         const files = [];
-        embed.setColor("#00c3ff");
+        embed.setColor("#00ffaa");
 
         // explain a command?
         if (args.length > 0 && args[0] !== 'all') {

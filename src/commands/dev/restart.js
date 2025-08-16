@@ -4,7 +4,7 @@ class Command {
         this.description = "Restart the bot";
         this.attributes = {
             unlisted: true,
-            permission: 1,
+            permission: 4,
         };
     }
 
