@@ -153,10 +153,6 @@ class Command {
                     text += "\n\n**Usage:**\n";
                     for (const example of command.example) {
                         text += `\`\`${example.text}\`\``;
-                        if (example.image) {
-                            files.push(`assets/examples/${example.image}`);
-                            text += ` *[image ${files.length}]*`;
-                        }
                         text += '\n';
                     }
                 }
